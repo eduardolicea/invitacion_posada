@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pussy Power y asociados – Posada 2026</title>
+  <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+  <main>
+
+    <!-- Pantalla 1: portada -->
+    <section id="inicio" class="pantalla">
+      <div class="tarjeta-cristal">
+        <h1>Posada 2026</h1>
+        <h3>Pussy Power y asociados</h3>
+        <button id="comenzar" class="boton" type="button">Comenzar</button>
+      </div>
+    </section>
+
+    <!-- Pantalla 2: POR DEFINIR -->
+    <section id="siguiente" class="pantalla" hidden>
+      <h2>Te invito a mi posada</h2>
+      <p>Así simple</p>
+      <!-- POR DEFINIR: aquí va el contenido de esta parte -->
+      <button id="atras" class="boton" type="button">Regresar</button>
+    </section>
+
+  </main>
+
+  <script>
+    document.getElementById('comenzar').addEventListener('click', function () {
+      document.getElementById('inicio').hidden = true;
+      document.getElementById('siguiente').hidden = false;
+    });
+    document.getElementById('atras').addEventListener('click', function () {
+      document.getElementById('inicio').hidden = false;
+      document.getElementById('siguiente').hidden = true;
+    });
+  </script>
+</body>
+
+</html>

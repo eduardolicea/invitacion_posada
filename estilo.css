@@ -1,0 +1,228 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  /* Al ser una fuente variable, soporta un rango de pesos */
+  font-style: normal;
+}
+
+:root {
+  --bg: #fff5f8;
+  --fg: #3b0a24;
+  --accent: #d6246e;
+  --muted: #8a4a66;
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c0712;
+    --fg: #ffe3ee;
+    --accent: #ff5fa2;
+    --muted: #d89ab5;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #1c0712;
+  --fg: #ffe3ee;
+  --accent: #ff5fa2;
+  --muted: #d89ab5;
+  color-scheme: dark;
+}
+
+html {
+  height: 100%;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  text-align: center;
+}
+
+main {
+  padding: 2rem 1.5rem;
+  max-width: 36rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: clamp(2rem, 8vw, 3.4rem);
+  line-height: 1.1;
+  margin: 0 0 1.5rem;
+  color: var(--accent);
+}
+
+h2 {
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: normal;
+  margin: 0 0 1rem;
+}
+
+h3 {
+  font-size: clamp(1.1rem, 4vw, 1.6rem);
+  font-weight: normal;
+  margin: 0 0 1.5rem;
+}
+
+p {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Pantallas */
+.pantalla {
+  animation: aparecer 0.5s ease;
+}
+
+.pantalla[hidden] {
+  display: none !important;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Pantalla 1: Portada (sección inicio) */
+#inicio {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: url("fondo_inicio.png") no-repeat center center;
+  background-size: cover;
+  padding: 2rem 1.5rem;
+  padding-top: max(2rem, env(safe-area-inset-top));
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  box-sizing: border-box;
+  text-align: center;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+/* Tarjeta con efecto de cristal esmerilado (Glassmorphism) */
+.tarjeta-cristal {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(15, 23, 42, 0.35) 100%);
+  backdrop-filter: blur(4px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 24rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+/* Efecto hover: se resalta hacia delante y se ilumina con luces doradas */
+.tarjeta-cristal:hover {
+  transform: scale(1.03) translateY(-4px);
+  border-color: rgba(255, 215, 0, 0.85);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45),
+    0 0 25px rgba(255, 215, 0, 0.6),
+    0 0 50px rgba(255, 190, 0, 0.35),
+    inset 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+#inicio h1 {
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 95, 162, 0.6);
+  margin: 0 0 0.5rem;
+}
+
+#inicio h3 {
+  color: #ffe3ee;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+  margin: 0 0 1.5rem;
+}
+
+/* Botón tipo cristal en la tarjeta de inicio */
+#inicio .boton {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  color: #ffffff;
+  padding: 0.85rem 2.5rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-top: 1.2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+/* Efecto hover: se agranda y se ilumina con aura azul y blanco */
+#inicio .boton:hover {
+  transform: scale(1.08);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.95);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.85),
+    0 0 30px rgba(56, 189, 248, 0.75),
+    0 0 50px rgba(14, 165, 233, 0.45),
+    inset 0 0 12px rgba(200, 235, 255, 0.5);
+}
+
+#inicio .boton:active {
+  transform: scale(0.98);
+}
+
+/* Botón general */
+.boton {
+  margin-top: 2rem;
+  padding: 0.8rem 2.2rem;
+  font: inherit;
+  font-size: 1.15rem;
+  color: var(--bg);
+  background: var(--accent);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+}
+
+.boton:hover {
+  transform: scale(1.05);
+}
+
+.boton:active {
+  transform: scale(0.97);
+}
