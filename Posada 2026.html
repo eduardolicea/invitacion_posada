@@ -9,12 +9,19 @@
 </head>
 
 <body>
+  <!-- Animación de nieve en toda la pantalla -->
+  <canvas id="nieve"></canvas>
+
   <main>
 
     <!-- Pantalla 1: portada -->
     <section id="inicio" class="pantalla">
       <div class="tarjeta-cristal">
         <h1>Posada 2026</h1>
+        <div class="contenedor-fotos">
+          <img src="imagenes/2.jpg" alt="Foto 2" class="foto foto-2">
+          <img src="imagenes/1.jpg" alt="Foto 1" class="foto foto-1">
+        </div>
         <h3>Pussy Power y asociados</h3>
         <button id="comenzar" class="boton" type="button">Comenzar</button>
       </div>
@@ -39,6 +46,76 @@
       document.getElementById('inicio').hidden = false;
       document.getElementById('siguiente').hidden = true;
     });
+
+    // Animación de nieve en toda la pantalla
+    (function () {
+      const canvas = document.getElementById('nieve');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', function () {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      // Crear copos con diferentes tamaños, velocidades y balanceos
+      const numFlakes = Math.min(100, Math.floor((width * height) / 10000) + 35);
+      const flakes = [];
+
+      for (let i = 0; i < numFlakes; i++) {
+        flakes.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 2.8 + 0.8,
+          speedY: Math.random() * 1.4 + 0.5,
+          speedX: Math.random() * 0.6 - 0.3,
+          sway: Math.random() * Math.PI * 2,
+          swaySpeed: Math.random() * 0.02 + 0.008,
+          opacity: Math.random() * 0.55 + 0.35,
+        });
+      }
+
+      function animarNieve() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = 0; i < flakes.length; i++) {
+          const f = flakes[i];
+          f.sway += f.swaySpeed;
+          f.y += f.speedY;
+          f.x += f.speedX + Math.sin(f.sway) * 0.5;
+
+          // Si sale por abajo, reaparece arriba
+          if (f.y > height + 5) {
+            f.y = -5;
+            f.x = Math.random() * width;
+          }
+          // Si sale por los lados, vuelve por el lado opuesto
+          if (f.x > width + 5) {
+            f.x = -5;
+          } else if (f.x < -5) {
+            f.x = width + 5;
+          }
+
+          ctx.beginPath();
+          ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${f.opacity})`;
+          if (f.radius > 2.2) {
+            ctx.shadowBlur = 5;
+            ctx.shadowColor = 'rgba(255, 255, 255, 0.85)';
+          } else {
+            ctx.shadowBlur = 0;
+          }
+          ctx.fill();
+        }
+
+        requestAnimationFrame(animarNieve);
+      }
+
+      requestAnimationFrame(animarNieve);
+    })();
   </script>
 </body>
 
