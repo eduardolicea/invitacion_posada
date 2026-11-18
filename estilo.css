@@ -128,8 +128,7 @@ p {
   align-items: center;
   justify-content: center;
   background:
-    url("imagenes/fondo_inicio2.png") no-repeat center center;
-  background-size: cover;
+    url("imagenes/fondo_inicio.png") no-repeat center center;
   padding: 2rem 1.5rem;
   padding-top: max(2rem, env(safe-area-inset-top));
   padding-bottom: max(2rem, env(safe-area-inset-bottom));
@@ -139,14 +138,27 @@ p {
   z-index: 10;
 }
 
-/* Tarjeta con efecto de cristal esmerilado (Glassmorphism) */
+/* Tarjeta con efecto Liquid Glass (cristal líquido reflectante) */
 .tarjeta-cristal {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(15, 23, 42, 0.35) 100%);
-  backdrop-filter: blur(4px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-  border-radius: 28px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(130% 120% at 15% 10%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.1) 45%, rgba(255, 255, 255, 0.02) 100%),
+    linear-gradient(140deg, rgba(255, 255, 255, 0.2) 0%, rgba(15, 23, 42, 0.28) 60%, rgba(255, 255, 255, 0.08) 100%);
+  backdrop-filter: blur(24px) saturate(200%) brightness(1.08);
+  -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.08);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.75);
+  border-left: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 32px;
+  box-shadow:
+    0 24px 50px -10px rgba(0, 0, 0, 0.5),
+    0 0 35px rgba(255, 95, 162, 0.16),
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.8),
+    inset 1px 0 2px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.3),
+    inset 0 0 30px rgba(255, 255, 255, 0.12);
   padding: clamp(2rem, 5vw, 3rem) clamp(1.6rem, 5vw, 2.5rem);
   width: 100%;
   max-width: 32rem;
@@ -159,14 +171,42 @@ p {
     border-color 0.35s ease;
 }
 
-/* Efecto hover: se resalta hacia delante y se ilumina con luces doradas */
+/* Reflejo y destello líquido curvo superior */
+.tarjeta-cristal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 48%;
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.26) 0%,
+      rgba(255, 255, 255, 0.08) 45%,
+      rgba(255, 255, 255, 0) 100%);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Mantener el contenido por encima del reflejo líquido */
+.tarjeta-cristal>* {
+  position: relative;
+  z-index: 1;
+}
+
+/* Efecto hover: reacción líquida bajo la luz */
 .tarjeta-cristal:hover {
-  transform: scale(1.02) translateY(-4px);
-  border-color: rgba(255, 215, 0, 0.85);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45),
-    0 0 25px rgba(255, 215, 0, 0.6),
-    0 0 50px rgba(255, 190, 0, 0.35),
-    inset 0 0 15px rgba(255, 215, 0, 0.2);
+  transform: scale(1.025) translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.6);
+  border-top-color: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 32px 64px -10px rgba(0, 0, 0, 0.55),
+    0 0 45px rgba(255, 95, 162, 0.3),
+    0 0 25px rgba(255, 215, 0, 0.35),
+    inset 0 2px 2px rgba(255, 255, 255, 0.95),
+    inset 1px 0 3px rgba(255, 255, 255, 0.6),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.35),
+    inset 0 0 40px rgba(255, 255, 255, 0.2);
 }
 
 #inicio h1 {
@@ -231,12 +271,16 @@ p {
   margin: 0 0 1rem;
 }
 
-/* Botón tipo cristal en la tarjeta de inicio */
+/* Botón tipo Liquid Glass en la tarjeta de inicio */
 #inicio .boton {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background:
+    radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.08) 100%),
+    rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px) saturate(190%);
+  -webkit-backdrop-filter: blur(14px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
   color: #ffffff;
   font-size: 1.25rem;
@@ -244,23 +288,32 @@ p {
   font-weight: 500;
   letter-spacing: 0.8px;
   margin-top: 0.8rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1.5px 2px rgba(0, 0, 0, 0.25),
+    inset 0 0 15px rgba(255, 255, 255, 0.1);
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 0.3s ease,
     border-color 0.3s ease,
     background 0.3s ease;
 }
 
-/* Efecto hover: se agranda y se ilumina con aura azul y blanco */
+/* Efecto hover: se agranda y se ilumina con aura líquida */
 #inicio .boton:hover {
   transform: scale(1.08);
-  background: rgba(255, 255, 255, 0.22);
+  background:
+    radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.18) 100%),
+    rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.95);
   color: #ffffff;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.85),
-    0 0 30px rgba(56, 189, 248, 0.75),
-    0 0 50px rgba(14, 165, 233, 0.45),
-    inset 0 0 12px rgba(200, 235, 255, 0.5);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.35),
+    0 0 20px rgba(255, 255, 255, 0.85),
+    0 0 35px rgba(56, 189, 248, 0.75),
+    0 0 55px rgba(14, 165, 233, 0.45),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.95),
+    inset 0 0 15px rgba(200, 235, 255, 0.5);
 }
 
 #inicio .boton:active {
